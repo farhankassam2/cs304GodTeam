@@ -198,13 +198,13 @@ public class branch implements ActionListener
         boolean quit = false;
 
         try {
-            // enable auto commit mode
+            // disable auto commit mode
             con.setAutoCommit(false);
 
-            while (!quit) {
-                mainFrame = new JFrame("StoreManager Updating Queries");
-                JButton query1 = new JButton("Send message to customer");
-                JTextField query1mid = new JTextField(10);
+//            while (!quit) {
+                mainFrame = new JFrame("Welcome to THE restaurant");
+                JButton storeManagerOption = new JButton("Login as StoreManager");
+                JButton customeroption = new JButton("Login as Customer");
 
 
                 JPanel contentPane = new JPanel();
@@ -218,11 +218,42 @@ public class branch implements ActionListener
 
                 contentPane.setLayout(gb);
                 contentPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-            }
 
-            con.close();
-            System.out.println("\nGood Bye!\n\n");
-            System.exit(0);
+                //place store manager button
+                c.gridwidth = GridBagConstraints.REMAINDER;
+                c.insets = new Insets(5, 10, 10, 10);
+                c.anchor = GridBagConstraints.CENTER;
+                gb.setConstraints(storeManagerOption, c);
+                contentPane.add(storeManagerOption);
+
+                // register button with action event handler
+                storeManagerOption.addActionListener(this);
+
+                // anonymous inner class for closing the window
+                mainFrame.addWindowListener(new WindowAdapter()
+                {
+                    public void windowClosing(WindowEvent e)
+                    {
+                        System.exit(0);
+                    }
+                });
+
+                // size the window to obtain a best fit for the components
+                mainFrame.pack();
+
+                // center the frame
+                Dimension d = mainFrame.getToolkit().getScreenSize();
+                Rectangle r = mainFrame.getBounds();
+                mainFrame.setLocation( (d.width - r.width)/2, (d.height - r.height)/2 );
+
+                // make the window visible
+                mainFrame.setVisible(true);
+
+//            }
+
+//            con.close();
+//            System.out.println("\nGood Bye!\n\n");
+//            System.exit(0);
 
 
         }
