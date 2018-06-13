@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="hb15">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../OracleDrivers/hb15.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
