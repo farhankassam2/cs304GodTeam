@@ -27,14 +27,14 @@ public class AllEventListener implements ActionListener {
             try {
                 Statement statement = this.b.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs = statement.executeQuery("SELECT oid from CONTAINS");
-                System.out.println(rs);
-                do {
-                    System.out.println(rs.getString("oid"));
-                } while (rs.next());
+
+                while (rs.next()) {
+                    System.out.println("OID: "+ rs.getInt("oid"));
+                }
             }
             catch (SQLException ex) {
                 System.out.println("Message: " + ex.getMessage());
-                System.exit(-1);
+//                System.exit(-1);
             }
         }
 
