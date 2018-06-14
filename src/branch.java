@@ -25,7 +25,7 @@ public class branch implements ActionListener
     // command line reader
     private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
-    private Connection con;
+    public Connection con;
 
     // user is allowed 3 login attempts
     private int loginAttempts = 0;
@@ -217,7 +217,7 @@ public class branch implements ActionListener
                 GridBagConstraints c = new GridBagConstraints();
 
                 contentPane.setLayout(gb);
-                contentPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+                contentPane.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
                 //place store manager button
                 c.gridwidth = GridBagConstraints.REMAINDER;
@@ -228,6 +228,9 @@ public class branch implements ActionListener
 
                 // register button with action event handler
                 storeManagerOption.addActionListener(this);
+                AllEventListener al = new AllEventListener(this, this.mainFrame);
+                storeManagerOption.addActionListener(al);
+
 
                 // anonymous inner class for closing the window
                 mainFrame.addWindowListener(new WindowAdapter()
