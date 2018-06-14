@@ -26,10 +26,10 @@ public class AllEventListener implements ActionListener {
         if (this.al.getActionCommand().equals("Login as StoreManager")) {
             try {
                 Statement statement = this.b.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                ResultSet rs = statement.executeQuery("SELECT Name from CONTAINS");
+                ResultSet rs = statement.executeQuery("SELECT oid from CONTAINS");
                 System.out.println(rs);
                 do {
-                    System.out.println(rs.getString("Name"));
+                    System.out.println(rs.getString("oid"));
                 } while (rs.next());
             }
             catch (SQLException ex) {
