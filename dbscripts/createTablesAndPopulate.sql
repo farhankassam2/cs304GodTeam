@@ -72,7 +72,7 @@ CREATE TABLE FoodItemOffers2 (
 	title varchar(50) NOT NULL,
 	PRIMARY KEY (fid),
 	UNIQUE(title),
-	FOREIGN KEY (sid) REFERENCES Store2
+	FOREIGN KEY (sid) REFERENCES Store2 ON DELETE CASCADE
 );
 grant select on FoodItemOffers2 to public;
 
@@ -100,10 +100,11 @@ CREATE TABLE Contains (
 	oid int,
 	fid int,
 	PRIMARY KEY (oid, fid),
-	FOREIGN KEY (oid) REFERENCES OrderFullfillsAndPlaces,
-	FOREIGN KEY (fid) REFERENCES FoodItemOffers2
+	FOREIGN KEY (oid) REFERENCES OrderFullfillsAndPlaces ON DELETE CASCADE,
+	FOREIGN KEY (fid) REFERENCES FoodItemOffers2 ON DELETE CASCADE
 );
 grant select on Contains to public;
+
 
 
 /* Insert 20 Stores, 70 Customers */
