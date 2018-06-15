@@ -8,6 +8,12 @@ package restaurantapp;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.WindowAdapter;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Vector;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,14 +22,23 @@ import java.awt.event.WindowAdapter;
 public class Admin extends javax.swing.JFrame {
     
     public dbConnectorMain db;
-
+    private static Admin admin_instance = null;
     /**
      * Creates new form Admin
      * @param db
      */
-    public Admin(dbConnectorMain db) {
+    
+   
+    private Admin(dbConnectorMain db) {
         initComponents();
         this.db = db;
+    }
+    
+    public static Admin getInstance(dbConnectorMain db) {
+        if (admin_instance == null) {
+            admin_instance= new Admin(db);
+        }
+        return admin_instance;
     }
 
     /**
@@ -238,6 +253,8 @@ public class Admin extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        this.db.setQuit(true);
+        this.db.welcomeScreen.dispose();
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -261,7 +278,7 @@ public class Admin extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        setContentPane(new PastOrders());
+        setContentPane(new PastOrders(this.db, this));
         pack();
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -331,6 +348,33 @@ public class Admin extends javax.swing.JFrame {
             }
         });
     }
+    
+    public static DefaultTableModel buildTableModel(ResultSet rs)
+        throws SQLException {
+
+    ResultSetMetaData metaData = rs.getMetaData();
+
+    // names of columns
+    Vector<String> columnNames = new Vector<String>();
+    int columnCount = metaData.getColumnCount();
+    for (int column = 1; column <= columnCount; column++) {
+        columnNames.add(metaData.getColumnName(column));
+    }
+
+    // data of the table
+    Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+    while (rs.next()) {
+        Vector<Object> vector = new Vector<Object>();
+        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+            vector.add(rs.getObject(columnIndex));
+        }
+        data.add(vector);
+    }
+
+    return new DefaultTableModel(data, columnNames);
+
+}
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -348,4 +392,6 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
+
+
 }

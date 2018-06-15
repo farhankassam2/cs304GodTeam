@@ -38,6 +38,7 @@ public class dbConnectorMain {
     public Admin welcomeScreen;
     public boolean quit = false;
     
+    
     public dbConnectorMain () {
          try
         {
@@ -52,6 +53,10 @@ public class dbConnectorMain {
             System.out.println("Message: " + ex.getMessage());
             System.exit(-1);
         }
+    }
+    
+    public void setQuit(boolean value) {
+        this.quit = value;
     }
     
     
@@ -86,7 +91,7 @@ public class dbConnectorMain {
         try {
             // disable auto commit mode
             con.setAutoCommit(false);
-            this.welcomeScreen = new Admin(this);
+            this.welcomeScreen = Admin.getInstance(this);
             this.welcomeScreen.initializeWelcomeScreen();
             
 
@@ -148,10 +153,10 @@ public class dbConnectorMain {
 
 
         }
-            catch (SQLException ex)
-            {
+        catch (SQLException ex)
+        {
                 System.out.println("Message: " + ex.getMessage());
-            }
+        }
         
     }
     
