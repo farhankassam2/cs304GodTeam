@@ -9,12 +9,12 @@ package restaurantapp;
  *
  * @author Kshitij
  */
-public class Orders extends javax.swing.JPanel {
+public class PlaceOrder extends javax.swing.JPanel {
 
     /**
      * Creates new form Orders
      */
-    public Orders() {
+    public PlaceOrder() {
         initComponents();
     }
 
@@ -59,6 +59,11 @@ public class Orders extends javax.swing.JPanel {
         jLabel6.setText("Order TIme");
 
         jButton1.setText("Place the Order");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -123,6 +128,11 @@ public class Orders extends javax.swing.JPanel {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        // Method to add and save to database
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

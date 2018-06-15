@@ -9,12 +9,12 @@ package restaurantapp;
  *
  * @author Kshitij
  */
-public class Messages extends javax.swing.JPanel {
+public class SendMessage extends javax.swing.JPanel {
 
     /**
      * Creates new form Messages
      */
-    public Messages() {
+    public SendMessage() {
         initComponents();
     }
 
@@ -53,6 +53,11 @@ public class Messages extends javax.swing.JPanel {
         jLabel5.setText("Time");
 
         jButton1.setText("Send Message");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Customer ID");
 
@@ -124,6 +129,11 @@ public class Messages extends javax.swing.JPanel {
                 .addContainerGap(112, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        // Method to save to database
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
