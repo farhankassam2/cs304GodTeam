@@ -359,6 +359,8 @@ public class Admin extends javax.swing.JFrame {
 //
 //                // make the window visible
                 db.welcomeScreen.setVisible(true);
+                
+          
             }
         });
     }
