@@ -13,12 +13,18 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 
 /**
  *
  * @author Kshitij
  */
+
+
+
+
 public class PastOrders extends javax.swing.JPanel {
     
     private dbConnectorMain db;
@@ -164,7 +170,7 @@ public class PastOrders extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "OID", "Food Title", "Store Name"
+                "Order ID", "Food Title", "Store Name"
             }
         ) {
             Class[] types = new Class [] {
@@ -196,36 +202,35 @@ public class PastOrders extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(284, 284, 284)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jLabel2)
-                        .addGap(42, 42, 42)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(284, 284, 284)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(jLabel2)
+                                .addGap(42, 42, 42)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(101, 101, 101)
+                                .addComponent(jButton1)))
+                        .addGap(260, 260, 260)))
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -235,12 +240,61 @@ public class PastOrders extends javax.swing.JPanel {
         // Method to perform a seach in database
              try {
                 Statement statement = this.db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                ResultSet rs = statement.executeQuery("SELECT o.oid, f2.title, s2.sname from orderfullfillsandplaces o, fooditemoffers2 f2, store2 s2, contains c where c.oid = o.oid AND c.fid = f2.fid AND o.sid=s2.sid AND o.cid = 35364");
+                ResultSet rs = statement.executeQuery("SELECT o.oid, f2.title "
+                        + ", s2.sname "
+                        + " from orderfullfillsandplaces o, fooditemoffers2 f2, store2 s2, contains c where c.oid = o.oid AND c.fid = f2.fid AND o.sid=s2.sid AND o.cid = "
+                        + jTextField1.getText());
                 
                  // It creates and displays the table
                  JTable resultTable = new JTable(Admin.buildTableModel(rs));
-                 jTable1 = resultTable;
-                 jTable1.setVisible(true);
+                 
+                 JTableHeader th = resultTable.getTableHeader();
+                TableColumnModel tcm = th.getColumnModel();
+                TableColumn tc1 = tcm.getColumn(1);
+                tc1.setHeaderValue( "Food Title" );
+                TableColumn tc2 = tcm.getColumn(2);
+                tc2.setHeaderValue("Store Name");
+                th.repaint();
+                
+                 jScrollPane1.setViewportView(resultTable);
+
+
+//try 2
+//                ResultSetMetaData rsmd = rs.getMetaData();
+//                int columnCount = rsmd.getColumnCount();
+//                
+//                ArrayList resultArray = new ArrayList<Order>(columnCount);
+//                
+//                while (rs.next()) {              
+//                   int i = 1;
+//                   while(i <= columnCount) {
+//                       Order order = new Order(rs.getInt("OID"), rs.getString("TITLE"), rs.getInt("SNAME"));
+//                       resultArray.add(order);
+//                   }
+//                }
+                
+//                //filling data from array into jTable
+//                
+//                 DefaultTableModel model = new DefaultTableModel();
+//                model.addColumn("OID");
+//                model.addColumn("Food Title");
+//                model.addColumn("Store Name");
+//
+//        for (int i = 0; i < usuaris.size(); i++){
+//            Vector<Date> fecha = new Vector<>(Arrays.asList(usuaris.get(i).getDate()));
+//            Vector<Integer> puntuacion = new Vector<>(Arrays.asList(usuaris.get(i).getPuntuacion()));
+//            Vector<Integer> tiempo = new Vector<>(Arrays.asList(usuaris.get(i).getTiempo()));
+//            Vector<Integer> espectadors = new Vector<>(Arrays.asList(usuaris.get(i).getTiempo()));
+//
+//            Vector<Object> row = new Vector<Object>();
+//            row.addElement(fecha.get(0));
+//            row.addElement(puntuacion.get(0));
+//            row.addElement(tiempo.get(0));
+//            row.addElement(espectadors.get(0));
+//            model.addRow(row);
+//        }
+                 
+                 
                  
             }
             catch (SQLException ex) {
@@ -256,9 +310,7 @@ public class PastOrders extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-
-           
+        // TODO add your handling code here:           
     }//GEN-LAST:event_jTable1MouseClicked
 
 
