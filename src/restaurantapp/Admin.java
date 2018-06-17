@@ -29,6 +29,7 @@ public class Admin extends javax.swing.JFrame {
     
     public dbConnectorMain db;
     private static Admin admin_instance = null;
+    public idGenerator ig;
     /**
      * Creates new form Admin
      * @param db
@@ -38,6 +39,11 @@ public class Admin extends javax.swing.JFrame {
     private Admin(dbConnectorMain db) {
         initComponents();
         this.db = db;
+        this.ig = new idGenerator();
+    }
+    
+    public idGenerator getIdGenerator() {
+      return this.ig;
     }
     
     public static Admin getInstance(dbConnectorMain db) {
@@ -249,7 +255,7 @@ public class Admin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        setContentPane(new PlaceOrder());
+        setContentPane(new PlaceOrder(this.db, this));
         pack();
     }//GEN-LAST:event_jButton1ActionPerformed
 
