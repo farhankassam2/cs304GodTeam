@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -40,12 +41,42 @@ public class PlaceOrder extends javax.swing.JPanel {
                  long time = Instant.now().toEpochMilli();
                  orderTime.setText(Integer.toString((int) time));
                  
-                 String[] options = {"pet", "cat"};
-                 foodOptions.removeAllItems();
-        for (String o : options) {
-            foodOptions.addItem(o);
-        }
-
+                 this.addFoodItemsToDropDown();
+                 
+//                 String[] options = {"pet", "cat"};
+    }
+    
+    public void addFoodItemsToDropDown() {
+         foodOptions.removeAllItems();
+                 ResultSet rs = this.db.readQueryAndReturnData("select title from foodItemOffers2 where sid = "
+                         + store.getText());
+                 
+                 ArrayList<String> items = new ArrayList<String>();
+                 
+                 try {
+                      while(rs.next()) {
+                        items.add(rs.getString("title"));
+                       }
+                      
+                      if (!items.isEmpty()) {
+                                for (String s : items) {
+                             foodOptions.addItem(s);
+                         }
+                      } else {
+                          JOptionPane j = new JOptionPane();
+                            j.showMessageDialog(null,
+                              "Warning: Either current store does not exist or current store does not contain any food items", "Warning Massage",
+                              JOptionPane.WARNING_MESSAGE);
+     
+                      }
+                 
+                   
+                    
+              
+                 } catch (SQLException ex) {
+                     System.out.println("Message: " + ex.getMessage());
+//                  System.exit(-1);
+                 }
     }
 
     /**
@@ -87,6 +118,25 @@ public class PlaceOrder extends javax.swing.JPanel {
         jLabel4.setText("Food Title");
 
         jLabel5.setText("Store ID");
+
+        store.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                storeActionPerformed(evt);
+            }
+        });
+        store.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                storePropertyChange(evt);
+            }
+        });
+        store.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                storeKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                storeKeyTyped(evt);
+            }
+        });
 
         jLabel6.setText("Order TIme");
 
@@ -176,16 +226,31 @@ public class PlaceOrder extends javax.swing.JPanel {
 //                ps.setInt(1, this.a.getIdGenerator().getNext("oid"));
 //                ps.setInt(2, this.a.getIdGenerator().getNext("sid"));
 //                ps.setInt(3, this.a.getIdGenerator().getNext("cid"));
-                ps.setInt(1, Integer.parseInt(customer.getText()));
-                ps.setInt(2, Integer.parseInt(order.getText()));
-                ps.setInt(3, Integer.parseInt(store.getText()));
+                ps.setInt(1, Integer.parseInt(order.getText()));
+                ps.setInt(2, Integer.parseInt(store.getText()));
+                ps.setInt(3, Integer.parseInt(customer.getText()));
                 ps.setInt(4, Integer.parseInt(orderTime.getText()));
                 ps.execute();
                 this.db.con.commit();
                 
+             
+                
                 PreparedStatement ps2 = this.db.con.prepareStatement("insert into Contains values (?,?)");
                 ps2.setInt(1, Integer.parseInt(order.getText()));
-//                foodtitle.getText();
+                String selectedFood = String.valueOf(foodOptions.getSelectedItem());
+                System.out.println("select fid from foodItemOffers2 where title = '"
+                        + selectedFood + "'");
+                
+                ResultSet correspondingFid = this.db.readQueryAndReturnData("select fid from foodItemOffers2 where title = '"
+                        + selectedFood + "'");
+                if (correspondingFid.next()) {
+                    System.out.println(correspondingFid.getInt("fid"));
+                    ps2.setInt(2, correspondingFid.getInt("fid"));
+                    ps2.execute();
+                    this.db.con.commit();
+                } else {
+                    System.out.println("Current chosen title does not having a corresponding fid in the table");
+                }
 
                 
 //                 // It creates and displays the table
@@ -221,6 +286,33 @@ public class PlaceOrder extends javax.swing.JPanel {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_foodOptionsActionPerformed
+
+    private void storeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeActionPerformed
+        // TODO add your handling code here:
+        
+        this.addFoodItemsToDropDown();
+    }//GEN-LAST:event_storeActionPerformed
+
+    private void storePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_storePropertyChange
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_storePropertyChange
+
+    private void storeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_storeKeyTyped
+        // TODO add your handling code here:
+                       
+
+    }//GEN-LAST:event_storeKeyTyped
+
+    private void storeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_storeKeyReleased
+        // TODO add your handling code here:
+         this.addFoodItemsToDropDown();
+                        try {
+                            Integer.parseInt(store.getText());
+                          } catch (NumberFormatException ex) {
+                              store.setText("1");
+                          }
+    }//GEN-LAST:event_storeKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
