@@ -45,7 +45,7 @@ public class dbConnectorMain {
             // Load the Oracle JDBC driver
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
             // may be oracle.jdbc.driver.OracleDriver as of Oracle 11g
-            connect("ora_w0k0b", "a30380159");
+            connect("ora_w7h0b", "a35169151");
             showMenu();
         }
         catch (SQLException ex)
