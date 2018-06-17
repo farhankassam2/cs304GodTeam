@@ -126,8 +126,8 @@ public class OrderReport extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     
-    private static void modifyColumnNames (JTable jt, ArrayList<String> columnNames) {
-        
+   public static void modifyColumnNames (JTable jt, ArrayList<String> columnNames) {
+       
         JTableHeader th = jt.getTableHeader();
         TableColumnModel tcm = th.getColumnModel();
         for (int i=0; i< tcm.getColumnCount(); i++) {
@@ -135,7 +135,7 @@ public class OrderReport extends javax.swing.JPanel {
             tc.setHeaderValue(columnNames.get(i));
         }
         th.repaint();
-        
+          
     }
     
     
@@ -155,7 +155,7 @@ public class OrderReport extends javax.swing.JPanel {
                  ArrayList<String> columnNames = new ArrayList<String>(
                          Arrays.asList("Food ID", "Food Title", "Food Description", "Customer ID", "Customer username", "Customer name", "Customer address"));
                  
-                 this.modifyColumnNames(resultTable, columnNames);
+                 Admin.modifyColumnNames(resultTable, columnNames);
                  jScrollPane1.setViewportView(resultTable);
 
          }

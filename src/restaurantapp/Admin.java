@@ -11,9 +11,15 @@ import java.awt.event.WindowAdapter;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -298,7 +304,7 @@ public class Admin extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-        setContentPane(new MessagesReport());
+        setContentPane(new MessagesReport(this.db, this));
         pack();
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -376,6 +382,20 @@ public class Admin extends javax.swing.JFrame {
     return new DefaultTableModel(data, columnNames);
 
 }
+    
+    public static void modifyColumnNames (JTable jt, ArrayList<String> columnNames) {
+         
+        
+        JTableHeader th = jt.getTableHeader();
+        TableColumnModel tcm = th.getColumnModel();
+        for (int i=0; i< tcm.getColumnCount(); i++) {
+            TableColumn tc = tcm.getColumn(i);
+            tc.setHeaderValue(columnNames.get(i));
+        }
+        th.repaint();
+        
+        
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
