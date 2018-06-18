@@ -2,19 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Z:/cs304/cs304final/src/restaurantapp/Admin.java</file>
-            <file>file:/Z:/cs304/cs304final/src/restaurantapp/PlaceOrder.java</file>
-            <file>file:/Z:/cs304/cs304final/src/restaurantapp/SendMessage.java</file>
-            <file>file:/Z:/cs304/cs304final/src/restaurantapp/MessagesReport.java</file>
-            <file>file:/Z:/cs304/cs304final/src/restaurantapp/dbConnectorMain.java</file>
-            <file>file:/Z:/cs304/cs304final/src/restaurantapp/CustomerQuery.java</file>
-            <file>file:/Z:/cs304/cs304final/src/restaurantapp/AddCustomer.java</file>
-            <file>file:/Z:/cs304/cs304final/src/restaurantapp/idGenerator.java</file>
-            <file>file:/Z:/cs304/cs304final/src/restaurantapp/PastOrders.java</file>
-            <file>file:/Z:/cs304/cs304final/src/ftitle.java</file>
-            <file>file:/Z:/cs304/cs304final/src/restaurantapp/FoodMonitor.java</file>
-            <file>file:/Z:/cs304/cs304final/src/restaurantapp/StoreQuery.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
