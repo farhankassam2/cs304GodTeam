@@ -47,7 +47,7 @@ public class CustomerQuery extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        jLabel1.setText("Which user has placed the most orders at X store?");
+        jLabel1.setText("Which user has placed the most orders at store X?");
         jLabel1.setToolTipText("");
 
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
