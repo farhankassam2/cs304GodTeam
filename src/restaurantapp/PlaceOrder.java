@@ -109,7 +109,7 @@ public class PlaceOrder extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Place An Order");
+        jLabel1.setText("Place An Order (adds a new order class with relevant attributes to that customer’s order along with corresponding Store and foodItems)");
 
         jLabel2.setText("OrderID");
 
@@ -161,9 +161,6 @@ public class PlaceOrder extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(261, 261, 261)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(153, 153, 153)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
@@ -180,15 +177,18 @@ public class PlaceOrder extends javax.swing.JPanel {
                             .addComponent(store)
                             .addComponent(customer)
                             .addComponent(order)
-                            .addComponent(foodOptions, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(324, Short.MAX_VALUE))
+                            .addComponent(foodOptions, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel1)))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(33, 33, 33)
                 .addComponent(jLabel1)
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(order, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

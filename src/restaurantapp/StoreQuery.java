@@ -153,14 +153,14 @@ public class StoreQuery extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          
-        
-                
-                jTextField1.setText(Integer.toString(this.a.getIdGenerator().getNext("sid")));
-                /*
-                long time = Instant.now().toEpochMilli();
-                 orderTime.setText(Integer.toString((int) time));
-                 this.addFoodItemsToDropDown();
-*/
+//        
+//                
+//                jTextField1.setText(Integer.toString(this.a.getIdGenerator().getNext("sid")));
+//                /*
+//                long time = Instant.now().toEpochMilli();
+//                 orderTime.setText(Integer.toString((int) time));
+//                 this.addFoodItemsToDropDown();
+//*/
                  
     }//GEN-LAST:event_jButton1ActionPerformed
 
