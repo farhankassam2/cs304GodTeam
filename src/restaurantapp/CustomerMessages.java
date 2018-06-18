@@ -114,10 +114,10 @@ public class CustomerMessages extends javax.swing.JPanel {
 
                 Statement statement = this.db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs = statement.executeQuery( 
-                        "select b.* from (select m.subject,m.content,s2.sName,s2.sAddress,to_char(to_date('1970-01-01 00','yyyy-mm-dd hh24') + (m.mTime)/1000/60/60/24 , 'DAY dd-MON HH12:MI am') as 'time'" +
+                        "select * from (select m.subject,m.content,s2.sName,s2.sAddress,to_char(to_date('1970-01-01 00','yyyy-mm-dd hh24') + (m.mTime)/1000/60/60/24 , 'DAY dd-MON HH12:MI am') as 'time'" +
                         "from MessageSendsAndReceives m, Store2 s2" +
                         "where m.sid=s2.sid and m.cid = "
-                                + jTextField1.getText() + " order by m.mTime asc) b where (ROWNUM=1)");
+                                + jTextField1.getText() + " order by m.mTime asc) where (ROWNUM=1)");
                         
                        /*"select f2.fid,f2.title,f1.description,c.cid,c.cUsername,c.cName,c.cAddress " +
                     "from orderfullfillsandplaces o,customer c,FoodItemOffers2 f2,FoodItemOffers1 f1,contains " +
