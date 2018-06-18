@@ -6,16 +6,26 @@
 
 package restaurantapp;
 
+import java.time.Instant;
+
 /**
  *
  * @author Kshitij
  */
 public class StoreQuery extends javax.swing.JPanel {
 
+    
+    private dbConnectorMain db;
+    private StringBuffer sid = null;
+    private Admin a;
     /** Creates new form StoreQuery */
-    public StoreQuery() {
+    public StoreQuery(dbConnectorMain db, Admin a) {
         initComponents();
+        this.db=db;
+        this.a=a;
     }
+    
+   
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -142,8 +152,16 @@ public class StoreQuery extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        // Method to search the database
+         
+        
+                
+                jTextField1.setText(Integer.toString(this.a.getIdGenerator().getNext("sid")));
+                /*
+                long time = Instant.now().toEpochMilli();
+                 orderTime.setText(Integer.toString((int) time));
+                 this.addFoodItemsToDropDown();
+*/
+                 
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
