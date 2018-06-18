@@ -32,13 +32,13 @@ public class CustomerWithMostMessage extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Customer ID", "Customer Name", "Customer Username", "Blah"
+                "Customer ID", "Customer Name", "Customer Username"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
