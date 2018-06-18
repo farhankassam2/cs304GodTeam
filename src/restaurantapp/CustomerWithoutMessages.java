@@ -5,13 +5,19 @@
  */
 package restaurantapp;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.swing.JTable;
+
 /**
  *
  * @author w0k0b
  */
 public class CustomerWithoutMessages extends javax.swing.JPanel {
    private dbConnectorMain db;
-    private StringBuffer cid=null;
     private Admin a;
     /**
      * Creates new form CustomerWithoutMessages
@@ -20,8 +26,32 @@ public class CustomerWithoutMessages extends javax.swing.JPanel {
         initComponents();
         this.db=db;
         this.a=a;
+        updateTable();
+    }
+    
+    private void updateTable()
+    {
+           try {
+            Statement statement = this.db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            
+            ResultSet rs = statement.executeQuery("SELECT cid,cUsername,cName,cAddress FROM Customer c WHERE NOT EXISTS (SELECT * FROM MessageSendsAndReceives m WHERE m.cid=c.cid)");
+           JTable resultTable = new JTable(Admin.buildTableModel(rs));
+                 ArrayList<String> columnNames = new ArrayList<String>(
+                         Arrays.asList("Customer ID", "Username", "Customer Name", "Customer Address"));
+                 
+                 Admin.modifyColumnNames(resultTable, columnNames);
+                 jScrollPane1.setViewportView(resultTable);
+            
+        }
+            catch (SQLException ex) {
+                System.out.println("Message: " + ex.getMessage());
+//                System.exit(-1);
+            }
     }
 
+    /*
+    SELECT cid,cUsername,cName,cAddress FROM Customer c WHERE NOT EXISTS (SELECT * FROM MessageSendsAndReceives m WHERE m.cid=c.cid);
+    */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,19 +61,42 @@ public class CustomerWithoutMessages extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "CID", "Username", "Name", "Address"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
