@@ -304,7 +304,7 @@ public class Admin extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        setContentPane(new FoodMonitor());
+        setContentPane(new FoodMonitor(this.db, this));
         pack();
     }//GEN-LAST:event_jButton9ActionPerformed
 
