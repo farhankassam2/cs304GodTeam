@@ -52,6 +52,15 @@ public class CustomerMessages extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+<<<<<<< HEAD
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Message Time", "Message Title", "Message Content"
+=======
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -59,6 +68,7 @@ public class CustomerMessages extends javax.swing.JPanel {
             },
             new String [] {
                 "Message Subject", "Message Content", "Store name", "Store address", "Message time"
+>>>>>>> 2123f742eead04f29808208824c3c0c6efa2a35c
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -88,8 +98,13 @@ public class CustomerMessages extends javax.swing.JPanel {
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
+<<<<<<< HEAD
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
+=======
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)))
                 .addGap(18, 18, 18))
+>>>>>>> 2123f742eead04f29808208824c3c0c6efa2a35c
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,14 +117,26 @@ public class CustomerMessages extends javax.swing.JPanel {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<<<<<<< HEAD
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
+=======
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
                 .addGap(27, 27, 27))
+>>>>>>> 2123f742eead04f29808208824c3c0c6efa2a35c
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
           try {
+<<<<<<< HEAD
+                Statement statement = this.db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs = statement.executeQuery( 
+"select * from (select m.subject,m.content,s2.sName,s2.sAddress,to_char(to_date('1970-01-01 00','yyyy-mm-dd hh24') + (m.mTime)/1000/60/60/24 , 'DAY dd-MON HH12:MI am ') \"Message Of Time" +
+"from  MessageSendsAndReceives m,Store2 s2" +
+"where m.sid=" + jTextField1.getText() + "order by m.mTime asc) where (ROWNUM=1)");
+=======
                            this.db.con.setAutoCommit(false); 
 
                 Statement statement = this.db.con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -121,6 +148,7 @@ public class CustomerMessages extends javax.swing.JPanel {
                             "where m.sid=s2.sid and m.cid = "
                                 + jTextField1.getText() +
                             " order by m.mTime asc) where (ROWNUM=1)");
+>>>>>>> 2123f742eead04f29808208824c3c0c6efa2a35c
                         
                        /*"select f2.fid,f2.title,f1.description,c.cid,c.cUsername,c.cName,c.cAddress " +
                     "from orderfullfillsandplaces o,customer c,FoodItemOffers2 f2,FoodItemOffers1 f1,contains " +
@@ -131,7 +159,11 @@ public class CustomerMessages extends javax.swing.JPanel {
                  // It creates and displays the table
                  JTable resultTable = new JTable(Admin.buildTableModel(rs));
                  ArrayList<String> columnNames = new ArrayList<String>(
+<<<<<<< HEAD
+                         Arrays.asList("Message Time", "Message Title", "Message Content"));
+=======
                          Arrays.asList("Message Subject", "Message Content", "Store Name", "Store address", "Message Time"));
+>>>>>>> 2123f742eead04f29808208824c3c0c6efa2a35c
                  Admin.modifyColumnNames(resultTable, columnNames);
                  jScrollPane1.setViewportView(resultTable);
          }

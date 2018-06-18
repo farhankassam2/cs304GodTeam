@@ -5,17 +5,30 @@
  */
 package restaurantapp;
 
+import java.sql.BatchUpdateException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  *
  * @author Kshitij
  */
 public class FoodMonitor extends javax.swing.JPanel {
+    
+    private dbConnectorMain db;
+    private StringBuffer cid = null;
+    private Admin a;
 
     /**
      * Creates new form FoodMonitor
      */
-    public FoodMonitor() {
+    public FoodMonitor(dbConnectorMain db, Admin a) {
         initComponents();
+           this.db = db;
+        this.a = a;
+        this.updateTable(true);
     }
 
     /**
@@ -30,13 +43,15 @@ public class FoodMonitor extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        fid = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        add = new javax.swing.JButton();
         update = new javax.swing.JButton();
         delete = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        description2 = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        title = new javax.swing.JTextField();
 
         jLabel1.setText("Food Monitoring");
 
@@ -57,24 +72,39 @@ public class FoodMonitor extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        add.setText("Add");
-        add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addActionPerformed(evt);
+        update.setText("Update Food Description");
+        update.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                updateMouseReleased(evt);
             }
         });
-
-        update.setText("Update");
         update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateActionPerformed(evt);
             }
         });
 
-        delete.setText("Delete");
+        delete.setText("Delete Food Item");
+        delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                deleteMouseReleased(evt);
+            }
+        });
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteActionPerformed(evt);
+            }
+        });
+
+        description2.setColumns(20);
+        description2.setRows(5);
+        jScrollPane2.setViewportView(description2);
+
+        jLabel3.setText("Food Title");
+
+        title.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                titleActionPerformed(evt);
             }
         });
 
@@ -85,27 +115,35 @@ public class FoodMonitor extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(76, 76, 76)
+                                .addComponent(jLabel4)
+                                .addGap(47, 47, 47))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                                .addGap(35, 35, 35)
+                                .addComponent(update)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(delete))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(title, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(fid, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)))
+                        .addGap(4, 4, 4))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(253, 253, 253)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
-                        .addGap(72, 72, 72)
-                        .addComponent(add)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(update)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(delete))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addGap(21, 21, 21)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)))
+                .addGap(347, 347, 347))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,30 +153,62 @@ public class FoodMonitor extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(fid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(78, 78, 78)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(update)
+                                    .addComponent(delete)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(add)
-                        .addComponent(update)
-                        .addComponent(delete)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                        .addGap(40, 40, 40)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-        // TODO add your handling code here:
-        // Method to save to database
-    }//GEN-LAST:event_addActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
         // TODO add your handling code here:
         // Method to update database
+        try {
+             this.db.con.setAutoCommit(false); 
+              PreparedStatement ps = this.db.con.prepareStatement("update (select FoodItemOffers1.description from FoodItemOffers1, FoodItemOffers2 " +
+                        "where (FoodItemOffers1.title=FoodItemOffers2.title) and (FoodItemOffers2.fid="
+                      + Integer.parseInt(fid.getText())
+                      + ")) F1 " +
+                        "set F1.description = '"
+                      + description2.getText()
+                      + "'");
+              ps.execute();
+              this.db.con.commit();
+       
+        } catch (BatchUpdateException ex)
+            {
+              System.out.println("Message: " + ex.getMessage());
+              int[] updateCounts = ex.getUpdateCounts();
+              System.out.println("Update Counts:");
+              for (int i = 0; i < updateCounts.length; i++)
+              {
+                 System.out.println(updateCounts[i]);
+              }
+            }
+            catch (SQLException ex2) {
+                System.out.println("Message: " + ex2.getMessage());
+//                System.exit(-1);
+            }
+     
         
         
     }//GEN-LAST:event_updateActionPerformed
@@ -146,19 +216,71 @@ public class FoodMonitor extends javax.swing.JPanel {
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
         // TODO add your handling code here:
         // Method to delete from database
+         try {
+             this.db.con.setAutoCommit(false); 
+              PreparedStatement ps = this.db.con.prepareStatement("delete from FoodItemOffers2 where title='"
+                      + title.getText()
+                      + "'");
+              ps.execute();
+              this.db.con.commit();
+       
+        } catch (BatchUpdateException ex)
+            {
+              System.out.println("Message: " + ex.getMessage());
+              int[] updateCounts = ex.getUpdateCounts();
+              System.out.println("Update Counts:");
+              for (int i = 0; i < updateCounts.length; i++)
+              {
+                 System.out.println(updateCounts[i]);
+              }
+            }
+            catch (SQLException ex2) {
+                System.out.println("Message: " + ex2.getMessage());
+//                System.exit(-1);
+            }
+     
+        
     }//GEN-LAST:event_deleteActionPerformed
+
+    private void updateMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseReleased
+        // TODO add your handling code here:
+        this.updateTable(true);
+    }//GEN-LAST:event_updateMouseReleased
+
+    private void titleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_titleActionPerformed
+
+    private void deleteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseReleased
+        // TODO add your handling code here:
+        this.updateTable(false);
+    }//GEN-LAST:event_deleteMouseReleased
+    
+    private void updateTable(boolean toUpdateonfid) {
+        String updateText = toUpdateonfid ? fid.getText() : title.getText();
+        ArrayList<String> columnNames = new ArrayList<String>(
+                         Arrays.asList("Food ID", "Title", "Description", "Store Name"));
+        this.db.readQueryAndUpdateUI("select f2.fid, f2.title, description, sName " +
+                                      "from FoodItemOffers1 f1, foodItemOffers2 f2, Store2 s2 where " +
+                                       "f1.title = f2.title and f2.sid = s2.sid and f2.fid=" + updateText, 
+                columnNames, 
+                jScrollPane1);
+    }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton add;
     private javax.swing.JButton delete;
+    private javax.swing.JTextArea description2;
+    private javax.swing.JTextField fid;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField title;
     private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }

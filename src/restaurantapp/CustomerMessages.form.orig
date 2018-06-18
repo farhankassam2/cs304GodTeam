@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+<<<<<<< HEAD
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+=======
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+>>>>>>> 2123f742eead04f29808208824c3c0c6efa2a35c
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -19,53 +23,53 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="247" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="store" pref="80" max="32767" attributes="0"/>
-                                  <Component id="customer" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="210" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                      <Component id="jTextField1" min="-2" pref="133" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+<<<<<<< HEAD
+                      <Component id="jScrollPane1" min="-2" pref="596" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
+=======
+                      <Component id="jScrollPane1" pref="596" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+>>>>>>> 2123f742eead04f29808208824c3c0c6efa2a35c
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="customer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                  <Component id="store" min="-2" max="-2" attributes="0"/>
-              </Group>
+<<<<<<< HEAD
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="410" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="342" max="-2" attributes="0"/>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
+=======
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="342" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+>>>>>>> 2123f742eead04f29808208824c3c0c6efa2a35c
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,18 +77,15 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Message Report (request to view all the messages, ordered by descending time, sent to a Customer by a Store)"/>
+        <Property name="text" type="java.lang.String" value="Customer Messages"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Customer ID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Store ID"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="jTextField1">
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -96,12 +97,19 @@
         <Component class="javax.swing.JTable" name="jTable1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="21">
-                <Column editable="true" title="Message ID" type="java.lang.Object"/>
-                <Column editable="true" title="Subject" type="java.lang.Object"/>
-                <Column editable="true" title="Content" type="java.lang.Object"/>
-                <Column editable="true" title="Message Time" type="java.lang.Integer"/>
-                <Column editable="true" title="Store Name" type="java.lang.Object"/>
+<<<<<<< HEAD
+              <Table columnCount="3" rowCount="4">
+                <Column editable="true" title="Message Time" type="java.lang.Object"/>
+                <Column editable="true" title="Message Title" type="java.lang.Object"/>
+                <Column editable="true" title="Message Content" type="java.lang.Object"/>
+=======
+              <Table columnCount="5" rowCount="4">
+                <Column editable="true" title="Message Subject" type="java.lang.Object"/>
+                <Column editable="true" title="Message Content" type="java.lang.Object"/>
+                <Column editable="true" title="Store name" type="java.lang.Object"/>
+                <Column editable="true" title="Store address" type="java.lang.Object"/>
+                <Column editable="true" title="Message time" type="java.lang.Object"/>
+>>>>>>> 2123f742eead04f29808208824c3c0c6efa2a35c
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -121,6 +129,8 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
+<<<<<<< HEAD
+=======
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -131,6 +141,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
+>>>>>>> 2123f742eead04f29808208824c3c0c6efa2a35c
               </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -140,16 +151,9 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="customer">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="customerActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="store">
-    </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Generate Report"/>
+        <Property name="text" type="java.lang.String" value="Search"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>

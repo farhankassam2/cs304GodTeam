@@ -3,4 +3,8 @@ do.depend=true
 do.jar=true
 javac.debug=true
 javadoc.preview=true
+<<<<<<< HEAD
+user.properties.file=/Users/Kshitij/Library/Application Support/NetBeans/8.2/build.properties
+=======
 user.properties.file=C:\\Users\\w0k0b\\AppData\\Roaming\\NetBeans\\8.2\\build.properties
+>>>>>>> 2123f742eead04f29808208824c3c0c6efa2a35c

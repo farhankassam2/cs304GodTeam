@@ -66,7 +66,7 @@ public class MessagesReport extends javax.swing.JPanel {
         store = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        jLabel1.setText("Message Report");
+        jLabel1.setText("Message Report (request to view all the messages, ordered by descending time, sent to a Customer by a Store)");
 
         jLabel3.setText("Customer ID");
 
@@ -131,14 +131,11 @@ public class MessagesReport extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(275, 275, 275)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4))
@@ -147,8 +144,9 @@ public class MessagesReport extends javax.swing.JPanel {
                                     .addComponent(store, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                                     .addComponent(customer))
                                 .addGap(109, 109, 109)
-                                .addComponent(jButton1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jButton1))
+                            .addComponent(jLabel1))
+                        .addGap(0, 210, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

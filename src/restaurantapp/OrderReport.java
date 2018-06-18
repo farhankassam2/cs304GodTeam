@@ -53,7 +53,7 @@ public class OrderReport extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        jLabel1.setText("Order report");
+        jLabel1.setText("Order report (list all the information in an order)");
 
         jLabel2.setText("Order ID");
 
@@ -96,21 +96,20 @@ public class OrderReport extends javax.swing.JPanel {
                 .addComponent(jButton1)
                 .addGap(242, 242, 242))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(380, 380, 380)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane1)))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1)
                 .addGap(39, 39, 39))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(305, 305, 305))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(42, 42, 42)
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jButton1)
