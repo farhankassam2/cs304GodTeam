@@ -78,7 +78,7 @@ public class CustomerWithoutMessages extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel1.setText("Division query: list all customers without messages");
+        jLabel1.setText("Division query: list all customers without sent messages");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

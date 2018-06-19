@@ -88,7 +88,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Division query: list all customers without messages"/>
+        <Property name="text" type="java.lang.String" value="Division query: list all customers without sent messages"/>
       </Properties>
     </Component>
   </SubComponents>

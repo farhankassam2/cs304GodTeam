@@ -26,13 +26,20 @@ public class CustomerWithMostMessage extends javax.swing.JPanel {
          this.db=db;
         this.a=a;
         
-        this.calculateMaxAverage();
     }
     
-    public void calculateMaxAverage() {
+    public void calculateMaxAverage(boolean max) {
+        String minOrMax = "";
+        if (max)  {
+            minOrMax = "Max";
+        } else {
+            minOrMax = "Min";
+        }
         ArrayList<String> columnNames = new ArrayList<String>(
-            Arrays.asList("Largest average number of messages"));
-        String sql = "SELECT Max(\"MessagesPerStoreOrdered\") \"HighestMessagesPerStore\" from (SELECT cid, AVG(\"MessageCountPerStore\") \"MessagesPerStoreOrdered\" from (SELECT cid, count(sid) \"MessageCountPerStore\" from MessageSendsAndReceives group by cid, sid) group by cid)";
+            Arrays.asList( minOrMax + " average number of messages"));
+        String sql = "SELECT "
+                + minOrMax
+                + "(\"MessagesPerStoreOrdered\") \"HighestMessagesPerStore\" from (SELECT cid, AVG(\"MessageCountPerStore\") \"MessagesPerStoreOrdered\" from (SELECT cid, count(sid) \"MessageCountPerStore\" from MessageSendsAndReceives group by cid, sid) group by cid)";
         this.db.readQueryAndUpdateUI(sql, columnNames, jScrollPane1);
     }
 
@@ -48,6 +55,9 @@ public class CustomerWithMostMessage extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        min = new javax.swing.JRadioButton();
+        max = new javax.swing.JRadioButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -57,12 +67,38 @@ public class CustomerWithMostMessage extends javax.swing.JPanel {
                 {null}
             },
             new String [] {
-                "Highest average number of messages"
+                "Largest or smallest average number of messages"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel1.setText("Nested aggregation: Largest number of messages per store per customer");
+        jLabel1.setText("Nested aggregation: Largest or Smallest number of messages per store per customer (no. of messages sent to/no. of stores sent by)");
+
+        jLabel2.setText("Calculate");
+
+        min.setText("Min");
+        min.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                minMouseReleased(evt);
+            }
+        });
+        min.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                minActionPerformed(evt);
+            }
+        });
+
+        max.setText("Max");
+        max.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                maxMouseReleased(evt);
+            }
+        });
+        max.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -71,28 +107,70 @@ public class CustomerWithMostMessage extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane1))
+                        .addGap(73, 73, 73))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
+                        .addGap(147, 147, 147)
+                        .addComponent(min)
+                        .addGap(18, 18, 18)
+                        .addComponent(max))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
                         .addComponent(jLabel1)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addGap(110, 110, 110))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(min)
+                    .addComponent(max))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                .addGap(37, 37, 37))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void maxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maxActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_maxActionPerformed
+
+    private void minActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_minActionPerformed
+
+    private void minMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minMouseReleased
+        // TODO add your handling code here:
+        if (min.isSelected()) {
+            this.calculateMaxAverage(false);
+            max.setSelected(false);
+        }
+    }//GEN-LAST:event_minMouseReleased
+
+    private void maxMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseReleased
+        // TODO add your handling code here:
+         if (max.isSelected()) {
+            this.calculateMaxAverage(true);
+            min.setSelected(false);
+        }
+    }//GEN-LAST:event_maxMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JRadioButton max;
+    private javax.swing.JRadioButton min;
     // End of variables declaration//GEN-END:variables
 }
