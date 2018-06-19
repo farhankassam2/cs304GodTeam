@@ -5,17 +5,35 @@
  */
 package restaurantapp;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  *
  * @author Kshitij
  */
 public class CustomerWithMostMessage extends javax.swing.JPanel {
 
+    
+      private dbConnectorMain db;
+    private StringBuffer cid=null;
+    private Admin a;
     /**
      * Creates new form CustomerWithMostMessage
      */
-    public CustomerWithMostMessage() {
+    public CustomerWithMostMessage(dbConnectorMain db,Admin a) {
         initComponents();
+         this.db=db;
+        this.a=a;
+        
+        this.calculateMaxAverage();
+    }
+    
+    public void calculateMaxAverage() {
+        ArrayList<String> columnNames = new ArrayList<String>(
+            Arrays.asList("Largest average number of messages"));
+        String sql = "SELECT Max(\"MessagesPerStoreOrdered\") \"HighestMessagesPerStore\" from (SELECT cid, AVG(\"MessageCountPerStore\") \"MessagesPerStoreOrdered\" from (SELECT cid, count(sid) \"MessageCountPerStore\" from MessageSendsAndReceives group by cid, sid) group by cid)";
+        this.db.readQueryAndUpdateUI(sql, columnNames, jScrollPane1);
     }
 
     /**
@@ -29,40 +47,51 @@ public class CustomerWithMostMessage extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Customer ID", "Customer Name", "Customer Username"
+                "Highest average number of messages"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        jLabel1.setText("Nested aggregation: Largest number of messages per store per customer");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(137, 137, 137)
+                        .addComponent(jLabel1)))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(67, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
